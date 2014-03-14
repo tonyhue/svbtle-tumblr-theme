@@ -7,9 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="imagetoolbar" content="false" />
         <!-- Title -->
-        <title>
-            {Title} {block:SearchPage}- {lang:Search results for SearchQuery}{/block:SearchPage}{block:PostSummary}- {PostSummary}{/block:PostSummary}{block:IndexPage}- {Description}{/block:IndexPage}
-        </title>
+        <title>{Title}{block:SearchPage} - {lang:Search results for SearchQuery}{/block:SearchPage}{block:PostSummary} - {PostSummary}{/block:PostSummary}</title>
+        
         <!-- Description -->
         {block:Description}
         <meta name="description" content="{MetaDescription}" />
@@ -20,7 +19,7 @@
         <!-- Custom Fonts -->
         <link href="http://fonts.googleapis.com/css?family=Oswald:400,700" rel="stylesheet" type="text/css" />
         <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,700,400italic" rel="stylesheet" type="text/css" />
-        <link href='http://static.tumblr.com/dbek3sy/VtLmbsu90/socialico.css' rel='stylesheet' type='text/css'>
+        <!-- <link href='http://static.tumblr.com/dbek3sy/VtLmbsu90/socialico.css' rel='stylesheet' type='text/css'> -->
         <!-- Meta -->
         <meta name="color:Sidebar Colour" content="#ffffff" />
         <meta name="image:Logo 200x200" content="http://static.tumblr.com/morei1o/Yrbmmupfl/logo_200x200.png" />
@@ -35,9 +34,11 @@
         <meta name="text:Google Analytics ID" content="" />
         <meta name="text:Disqus Shortname" content="" />
         <meta name="if:Enable Comment Count" content="1" />
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://tonyhue.com/svbtle.js"></script>
         <!-- For Syntax Highlighting -->
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"></link>  
+        <!--<link rel="stylesheet" type="text/css" href="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.css"></link>  
         <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>  
         <script>
             function styleCode() {
@@ -56,7 +57,7 @@
             }
     
             $(function() {styleCode();});
-        </script>
+        </script>-->
         <!-- Facebook Open Graph -->
         <meta property="og:site_name" content="{Title}"/>
         {block:PermalinkPage}
@@ -123,7 +124,87 @@
             <meta property="og:type" content="blog"/>
             <meta property="og:description" content="{MetaDescription}"/>
             <meta property="og:image" content="{PortraitURL-128}"/>
-        {/block:IndexPage}        
+        {/block:IndexPage}   
+
+        <!--Twitter Card-->
+            {block:PermalinkPage}
+                {block:Posts}
+                    {block:Text}
+                        {block:Title}
+                            <meta name="twitter:title" value="{PlaintextTitle}" />
+                        {/block:Title}
+                        <meta name="twitter:description" value="{PlaintextBody}" />
+                        <meta name="twitter:image" value="{PortraitURL-128}" />
+                        <meta name="twitter:card" value="summary" />
+                    {/block:Text}
+                    {block:Photo}
+                        <meta name="twitter:image" value="{PhotoURL-500}" />
+                        {block:Caption}
+                            <meta name="twitter:description" value="{PlaintextCaption}" />
+                        {/block:Caption}
+                        <meta name="twitter:card" value="photo" />
+                    {/block:Photo}
+                    {block:Photoset}
+                        {block:Photos}
+                            <meta name="twitter:image" value="{PhotoURL-500}" />
+                        {/block:Photos}
+                        {block:Caption}
+                            <meta name="twitter:description" value="{PlaintextCaption}" />
+                        {/block:Caption}
+                        <meta name="twitter:card" value="photo" />
+                    {/block:Photoset}
+                    {block:Quote}
+                        <meta name="twitter:title" value="{PlaintextQuote}" />
+                        <meta name="twitter:description" value="{PlaintextSource}" />
+                        <meta name="twitter:image" value="{PortraitURL-128}" />
+                        <meta name="twitter:card" value="summary" />
+                    {/block:Quote}
+                    {block:Link}
+                        <meta name="twitter:title" value="{PlaintextName}" />
+                        <meta name="twitter:description" value="{PlaintextDescription}" />
+                        <meta name="twitter:image" value="{PortraitURL-128}" />
+                        <meta name="twitter:card" value="summary" />
+                    {/block:Link}
+                    {block:Chat}
+                        <meta name="twitter:title" value="{PlaintextTitle}" />
+                        <meta name="twitter:description" value="{block:Lines}{block:Label}{Label}: {/block:Label}{Line} &bull; {/block:Lines}" />
+                        <meta name="twitter:image" value="{PortraitURL-128}" />
+                        <meta name="twitter:card" value="summary" />
+                    {/block:Chat}
+                    {block:Audio}
+                        <meta name="twitter:title" value="{block:Artist}{Artist} - {/block:Artist}{block:TrackName}{TrackName}{/block:TrackName}" />
+                        <meta name="twitter:description" value="{PlaintextCaption}" />
+                        {block:AlbumArt}
+                            <meta name="twitter:image" value="{AlbumArtURL}" />
+                        {/block:AlbumArt}
+                        <meta name="twitter:card" value="player" />
+                    {/block:Audio}
+                    {block:Video}
+                        {block:Caption}
+                            <meta name="twitter:description" value="{PlaintextCaption}" />
+                        {/block:Caption}
+                        <meta name="twitter:card" value="player" />
+                    {/block:Video}
+                    {block:Answer}
+                        <meta name="twitter:title" value="{PlaintextQuestion}" />
+                        <meta name="twitter:description" value="{PlaintextAnswer}" />
+                        <meta name="twitter:image" value="{PortraitURL-128}" />
+                        <meta name="twitter:card" value="summary" />
+                    {/block:Answer}
+                {/block:Posts}
+                
+                <meta name="twitter:url" value="{Permalink}" />
+                <meta name="twitter:site" value="@tonykhue" />
+                <meta name="twitter:creator" value="@tonykhue" />
+                
+            {/block:PermalinkPage}
+            {block:IndexPage}
+                <meta name="twitter:title" value="{Title}" />
+                <meta name="twitter:description" value="{MetaDescription}" />
+                <meta name="twitter:card" value="summary" />
+            {/block:IndexPage}
+        <!--END Twitter Card-->   
+
         <!-- CSS -->
         <style type="text/css">
             /* General Settings */
@@ -131,7 +212,7 @@
                 font-family: "PT Sans", sans-serif;
                 font-weight: 400;
                 -webkit-text-size-adjust: 100%;
-            	-ms-text-size-adjust: 100%;
+                -ms-text-size-adjust: 100%;
                 -webkit-font-smoothing: antialiased;
                 margin: 0 0 0 0;
             }
@@ -157,8 +238,8 @@
                 background-image: url("{image:Logo 200x200}");
                 background-size: 140px 140px;
                 background-repeat: no-repeat;
-        		background-color:transparent;
-    			background-position:center center;
+                background-color:transparent;
+                background-position:center center;
             }
             #sidebar .logo h1 {
                 text-transform: uppercase;
@@ -295,11 +376,11 @@
             #post .text h3 {
                 margin-top: 40px;
             }
-            #post .text h2 {
+            /*#post .text h2 {
                 font-family: "socialicoregular";
                 font-size: 60px;
                 color: {color:Navigation Colour};
-            }
+            }*/
             #post .text h2 a, #post .text h2 a:visited {
                 text-decoration: none;
                 font-weight: normal;
@@ -406,7 +487,7 @@
                 height: 100%;
             }
             /* Social */
-            #social {
+            /*#social {
                 border-top: 1px solid #e3e3e3;
                 padding-top: 25px;
                 padding-bottom: 20px;
@@ -416,6 +497,31 @@
             }
             .fb-like {
             vertical-align: top;
+            }*/
+            /* Post Notes */
+            #notes {
+                border-top: 1px solid #e3e3e3;
+                padding: 40px 0;
+            }
+            .notes {
+                margin: 0 0 0 40px;
+                padding: 0;
+            }
+            .notes li {
+                list-style: none;
+                padding: 10px 0;
+                font-size: 14px;
+                color: rgba(90, 90, 90, 0.8);
+            }
+            .notes a {
+                text-decoration: none;
+                color: {color:Highlight Colour};
+            }
+            .avatar_frame {
+                margin-right: 10px;
+            }
+            .notes .avatar {
+                border-radius: 2px;
             }
             /* Post Footer */
             #postfooter {
@@ -501,28 +607,28 @@
                     width: 400px;
                 }
                 #sidebar .logo .img {
-                	width: 200px;
-                	height: 200px;
-                	margin-left: 50px;
-                	background-size: 200px 200px;
+                    width: 200px;
+                    height: 200px;
+                    margin-left: 50px;
+                    background-size: 200px 200px;
                 }
                 #sidebar .logo h1 {
-                	font-size: 30px;
-                	margin-left: 50px;
+                    font-size: 30px;
+                    margin-left: 50px;
                     margin-right: 40px;
                     margin-bottom: 8px;
                 }
                 #sidebar .description {
-                	font-size: 18px;
-                	line-height: 26px;
-                	margin-left: 50px;
+                    font-size: 18px;
+                    line-height: 26px;
+                    margin-left: 50px;
                     margin-right: 40px;
                     margin-top: 0px;
                 }
                 #sidebar .navigation a {
-                	font-size: 18px;
-                	margin-top: 16px;
-                	margin-left: 38px;
+                    font-size: 18px;
+                    margin-top: 16px;
+                    margin-left: 38px;
                     padding: 12px;
                     padding-left: 24px;
                     padding-right: 24px;
@@ -530,39 +636,39 @@
                     border-color: #efefef;
                 }
                 #main {
-                	margin-left: 400px;
+                    margin-left: 400px;
                 }
                 #date {
                     padding-top: 50px;
                 }
                 #date a, #date a:visited {
-                	font-size: 16px;
-                	margin-left: 50px;
+                    font-size: 16px;
+                    margin-left: 50px;
                 }
                 #post {
-                	margin-left: 50px;
-                	margin-right: 50px;
-                	max-width: 900px;
+                    margin-left: 50px;
+                    margin-right: 50px;
+                    max-width: 900px;
                 }
                 #post .text {
-                	font-size: 18px;
-                	line-height: 26px;
+                    font-size: 18px;
+                    line-height: 26px;
                 }
                 #post .title {
-                	font-size: 26px;
+                    font-size: 26px;
                 }
                 #post .quote {
-                	font-size: 26px;
+                    font-size: 26px;
                 }
                 #post .audiocaption {
-                	font-size: 16px;
+                    font-size: 16px;
                 }
                 .social_links {
                 margin-left: 50px;
                 }
                 
                 #postfooter a, #postfooter a:visited {
-                	margin-left: 50px;
+                    margin-left: 50px;
                 }
                 #disqus_thread {
                     margin-left: 50px;
@@ -570,42 +676,42 @@
                     max-width: 900px;
                 }
                 #pagination .next {
-                	margin-right: 50px;
+                    margin-right: 50px;
                 }
                 #pagination .prev {
-                	margin-left: 50px;
+                    margin-left: 50px;
                 }
             }
             /* Tablets (Portrait) ----------- */
             @media only screen and (max-width: 800px) {
                 #sidebar {
                     display: block;
-                	height: auto;
-                	margin: 0;
-                	padding: 0;
+                    height: auto;
+                    margin: 0;
+                    padding: 0;
                     padding-bottom: 40px;
-                	position: relative;
-                	text-align: center;
-                	width: auto;
+                    position: relative;
+                    text-align: center;
+                    width: auto;
                 }
                 #sidebar .logo .img {
-                	margin-left: 0px;
+                    margin-left: 0px;
                     margin: 20px auto;
                 }
                 #sidebar .logo h1 {
-                	margin-left: 6%;
-                	margin-right: 6%;
+                    margin-left: 6%;
+                    margin-right: 6%;
                 }
                 #sidebar .description {
-                	margin-left: 6%;
-                	margin-right: 6%;
+                    margin-left: 6%;
+                    margin-right: 6%;
                 }
                 #sidebar .navigation {
-                	display: inline-block;
+                    display: inline-block;
                     width: 100%;
                 }
                 #sidebar .navigation a {
-                	margin-left: 2px;
+                    margin-left: 2px;
                     margin-right: 2px;
                 }
                 #main {
@@ -618,7 +724,7 @@
                     margin-left: 6%;
                 }
                 #post {
-                	margin-left: 6%;
+                    margin-left: 6%;
                     margin-right: 6%;
                     max-width: 768px;
                 }
@@ -626,7 +732,7 @@
                 margin-left: 6%;
                 }
                 #postfooter a, #postfooter a:visited {
-                	margin-left: 6%;
+                    margin-left: 6%;
                 }
                 #disqus_thread {
                     margin-left: 6%;
@@ -634,10 +740,10 @@
                     max-width: 768px;
                 }
                 #pagination .next {
-                	margin-right: 6%;
+                    margin-right: 6%;
                 }
                 #pagination .prev {
-                	margin-left: 6%;
+                    margin-left: 6%;
                 }
             }
             /* Tablets (Landscape) ----------- */
@@ -664,14 +770,14 @@
     </head>
     <body>        
         <!-- Facebook Script -->
-        <div id="fb-root"></div>
+        <!--<div id="fb-root"></div>
         <script>(function(d, s, id) {
           var js, fjs = d.getElementsByTagName(s)[0];
           if (d.getElementById(id)) return;
           js = d.createElement(s); js.id = id;
           js.src = "//connect.facebook.net/ca_EN/all.js#xfbml=1";
           fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+        }(document, 'script', 'facebook-jssdk'));</script>-->
         <!-- Sidebar
         ---------------------------------->
         <div id="sidebar">
@@ -682,7 +788,7 @@
                 </a>
                 <a href="/" title="{Title}">
                     <h1>{Title}</h1>
-			    </a>
+                </a>
             </div>
             <!-- Description -->
             <div class="description">
@@ -690,6 +796,7 @@
             </div>
             <!-- Navigation -->
             <div class="navigation">
+                <a href="/tagged/best_of">Best Of</a>
                 {block:HasPages}{block:Pages}<a href="{url}">{Label}</a>{/block:Pages}{/block:HasPages}
                 {block:AskEnabled}<a href="/ask">{AskLabel}</a>{/block:AskEnabled}
                 {block:SubmissionsEnabled}<a href="/submit">{SubmitLabel}</a>{/block:SubmissionsEnabled}
@@ -703,15 +810,18 @@
             {block:Photo}
                 <div id="date">
                     <a href="{Permalink}">
-                        {block:Date}{DayOfMonth} {Month} {Year}{/block:Date}
+                        {block:Date}{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}{/block:Date}
                     </a>
                     {block:IfEnableCommentCount}
-        				{block:IfDisqusShortname}
-						<a href="{Permalink}#disqus_thread">0 Comments</a>
-						{/block:IfDisqusShortname}
-					{/block:IfEnableCommentCount}
+                        {block:IfDisqusShortname}
+                        <a href="{Permalink}#disqus_thread" class="disqus">{lang:View comments}</a>
+                        {/block:IfDisqusShortname}
+                    {/block:IfEnableCommentCount}
+                    {block:NoteCount}
+                        <a href="{Permalink}#notes" class="notes">{NoteCountWithLabel}</a>
+                    {/block:NoteCount}
                 </div>
-                <div id="post">
+                <div id="post" class="photo">
                     {LinkOpenTag}
                         <img src="{PhotoURL-HighRes}" />
                     {LinkCloseTag}
@@ -724,13 +834,17 @@
             {block:Photoset}
                 <div id="date">
                     <a href="{Permalink}">
-                        {block:Date}{DayOfMonth} {Month} {Year}{/block:Date}
+                        {block:Date}{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}{/block:Date}
                     </a>
                     {block:IfEnableCommentCount}
-        				{block:IfDisqusShortname}
-						<a href="{Permalink}#disqus_thread">0 Comments</a>
-						{/block:IfDisqusShortname}
-					{/block:IfEnableCommentCount}
+                        {block:IfDisqusShortname}
+                        <a href="{Permalink}#disqus_thread" class="disqus">{lang:View comments}</a>
+                        {/block:IfDisqusShortname}
+                    {/block:IfEnableCommentCount}
+
+                    {block:NoteCount}
+                        <a href="{Permalink}#notes" class="notes">{NoteCountWithLabel}</a>
+                    {/block:NoteCount}
                 </div>
                 <div id="post">
                     <div class="photoset">
@@ -747,13 +861,17 @@
             {block:Video}
                 <div id="date">
                     <a href="{Permalink}">
-                        {block:Date}{DayOfMonth} {Month} {Year}{/block:Date}
+                        {block:Date}{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}{/block:Date}
                     </a>
                     {block:IfEnableCommentCount}
-        				{block:IfDisqusShortname}
-						<a href="{Permalink}#disqus_thread">0 Comments</a>
-						{/block:IfDisqusShortname}
-					{/block:IfEnableCommentCount}
+                        {block:IfDisqusShortname}
+                        <a href="{Permalink}#disqus_thread" class="disqus">{lang:View comments}</a>
+                        {/block:IfDisqusShortname}
+                    {/block:IfEnableCommentCount}
+
+                    {block:NoteCount}
+                        <a href="{Permalink}#notes" class="notes">{NoteCountWithLabel}</a>
+                    {/block:NoteCount}
                 </div>
                 <div id="post">
                     <p></p>
@@ -767,13 +885,17 @@
             {block:Audio}
                 <div id="date">
                     <a href="{Permalink}">
-                        {block:Date}{DayOfMonth} {Month} {Year}{/block:Date}
+                        {block:Date}{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}{/block:Date}
                     </a>
                     {block:IfEnableCommentCount}
-        				{block:IfDisqusShortname}
-						<a href="{Permalink}#disqus_thread">0 Comments</a>
-						{/block:IfDisqusShortname}
-					{/block:IfEnableCommentCount}
+                        {block:IfDisqusShortname}
+                        <a href="{Permalink}#disqus_thread" class="disqus">{lang:View comments}</a>
+                        {/block:IfDisqusShortname}
+                    {/block:IfEnableCommentCount}
+
+                    {block:NoteCount}
+                        <a href="{Permalink}#notes" class="notes">{NoteCountWithLabel}</a>
+                    {/block:NoteCount}
                 </div>
                 <div id="post">
                     <div class="audio">
@@ -789,13 +911,17 @@
             {block:Quote}
                 <div id="date">
                     <a href="{Permalink}">
-                        {block:Date}{DayOfMonth} {Month} {Year}{/block:Date}
+                        {block:Date}{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}{/block:Date}
                     </a>
                     {block:IfEnableCommentCount}
-        				{block:IfDisqusShortname}
-						<a href="{Permalink}#disqus_thread">0 Comments</a>
-						{/block:IfDisqusShortname}
-					{/block:IfEnableCommentCount}
+                        {block:IfDisqusShortname}
+                        <a href="{Permalink}#disqus_thread" class="disqus">{lang:View comments}</a>
+                        {/block:IfDisqusShortname}
+                    {/block:IfEnableCommentCount}
+
+                    {block:NoteCount}
+                        <a href="{Permalink}#notes" class="notes">{NoteCountWithLabel}</a>
+                    {/block:NoteCount}
                 </div>
                 <div id="post">
                     <a href="{Permalink}">
@@ -810,22 +936,19 @@
             {block:Text}
                 <div id="date">
                     <a href="{Permalink}">
-                        {block:Date}{DayOfMonth} {Month} {Year}{/block:Date}
+                        {block:Date}{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}{/block:Date}
                     </a>
-                    {block:IndexPage}
+
                     {block:IfEnableCommentCount}
-        				{block:IfDisqusShortname}
-						<a href="{Permalink}#disqus_thread">0 Comments</a>
-						{/block:IfDisqusShortname}
-					{/block:IfEnableCommentCount}
-                    {/block:IndexPage}
-                    {block:PermalinkPagination}
-                    {block:IfEnableCommentCount}
-            			{block:IfDisqusShortname}
-						<a href="{Permalink}#disqus_thread">0 Comments</a>
-						{/block:IfDisqusShortname}
-					{/block:IfEnableCommentCount}
-                    {/block:PermalinkPagination}
+                        {block:IfDisqusShortname}
+                        <a href="{Permalink}#disqus_thread" class="disqus">{lang:View comments}</a>
+                        {/block:IfDisqusShortname}
+                    {/block:IfEnableCommentCount}
+                        
+                    {block:NoteCount}
+                        <a href="{Permalink}#notes" class="notes">{NoteCountWithLabel}</a>
+                    {/block:NoteCount}
+
                 </div>
                 <div id="post">
                     <a href="{Permalink}">
@@ -840,7 +963,7 @@
             {block:Answer}
                 <div id="date">
                     <a href="{Permalink}">
-                        {block:Date}{DayOfMonth} {Month} {Year}{/block:Date}
+                        {block:Date}{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}{/block:Date}
                     </a>
                 </div>
                 <div id="post">
@@ -855,13 +978,16 @@
             {block:Chat}
                 <div id="date">
                     <a href="{Permalink}">
-                        {block:Date}{DayOfMonth} {Month} {Year}{/block:Date}
+                        {block:Date}{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}{/block:Date}
                     </a>
                     {block:IfEnableCommentCount}
-        				{block:IfDisqusShortname}
-						<a href="{Permalink}#disqus_thread">0 Comments</a>
-						{/block:IfDisqusShortname}
-					{/block:IfEnableCommentCount}
+                        {block:IfDisqusShortname}
+                        <a href="{Permalink}#disqus_thread" class="disqus">{lang:View comments}</a>
+                        {/block:IfDisqusShortname}
+                    {/block:IfEnableCommentCount}
+                    {block:NoteCount}
+                        <a href="{Permalink}#notes" class="notes">{NoteCountWithLabel}</a>
+                    {/block:NoteCount}
                 </div>
                 <div id="post">
                     <a href="{Permalink}">
@@ -885,13 +1011,17 @@
             {block:Link}
                 <div id="date">
                     <a href="{Permalink}">
-                        {block:Date}{DayOfMonth} {Month} {Year}{/block:Date}
+                        {block:Date}{Month} {DayOfMonth}{DayOfMonthSuffix}, {Year}{/block:Date}
                     </a>
                     {block:IfEnableCommentCount}
-        				{block:IfDisqusShortname}
-						<a href="{Permalink}#disqus_thread">0 Comments</a>
-						{/block:IfDisqusShortname}
-					{/block:IfEnableCommentCount}
+                        {block:IfDisqusShortname}
+                        <a href="{Permalink}#disqus_thread" class="disqus">{lang:View comments}</a>
+                        {/block:IfDisqusShortname}
+                    {/block:IfEnableCommentCount}
+
+                    {block:NoteCount}
+                        <a href="{Permalink}#notes" class="notes">{NoteCountWithLabel}</a>
+                    {/block:NoteCount}
                 </div>
                 <div id="post">
                     <div class="title"><a href="{URL}">{Name}</a></div>
@@ -902,14 +1032,16 @@
             {/block:Link}
             <!-- Post Footer -->
             {block:PermalinkPage}
-            <div id="social">
+            <!-- <div id="social">
                 <div class="social_links">
-                    <div class="g-plusone" data-size="medium"></div>
-                    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-                    <div class="fb-like" data-send="false" data-layout="button_count"></div>
                 </div>
-            </div>
+            </div> -->
+            {block:PostNotes}
+              <div id="notes">
+                  {PostNotes}
+              </div>
+            {/block:PostNotes}
+
             <div id="postfooter">
                 {block:IfDisqusShortname}
                     {block:Permalink}
@@ -949,33 +1081,33 @@
     <!-- Disqus -->
     {block:IfDisqusShortname}
     <script>
-		var disqus_shortname = '{text:Disqus Shortname}';
-		(function () {
-			var s = document.createElement('script'); s.async = true;
-			s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-		}());
-	</script>
-	{/block:IfDisqusShortname}
+        var disqus_shortname = '{text:Disqus Shortname}';
+        (function () {
+            var s = document.createElement('script'); s.async = true;
+            s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    </script>
+    {/block:IfDisqusShortname}
     <!-- Google Analytics -->
     {block:IfGoogleAnalyticsID}
     <script>
         var _gaq = _gaq || [];
-		_gaq.push(['_setAccount', '{text:Google Analytics ID}']);
-		_gaq.push(['_trackPageview']);
-		(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-		})();
-	</script>
-	{/block:IfGoogleAnalyticsID}
+        _gaq.push(['_setAccount', '{text:Google Analytics ID}']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    {/block:IfGoogleAnalyticsID}
     <!-- Google Plusone -->
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         (function() {
             var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
             po.src = 'https://apis.google.com/js/plusone.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
     })();
-    </script>
+    </script>-->
 </html>
