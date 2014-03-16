@@ -34,6 +34,7 @@
         <meta name="text:Google Analytics ID" content="" />
         <meta name="text:Disqus Shortname" content="" />
         <meta name="if:Enable Comment Count" content="1" />
+        <meta name="if:Hide Disqus comment count if zero" content="0">
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="http://static.tumblr.com/lzizhbo/HrPn2ejd9/svbtle.js"></script>
@@ -311,7 +312,7 @@
             /* Main Content */
             #main {
                 margin-left: 300px;
-                background-color: #fff;
+                background-color: #FFF;
                 border-left: 1px solid #e3e3e3;
                 min-height: 900px;
             }
@@ -435,6 +436,12 @@
                 font-weight: 400;
                 margin-top: 20px;
                 color: {color:Post Title Colour};
+            }
+            #post .link {
+                font-size: 20px;
+            }
+            #post .link a {
+                border-bottom: 1px solid #E3E3E3;
             }
             #post img {
                 margin-top: 20px;
@@ -767,6 +774,16 @@
         <style>
             {CustomCSS}
         </style>
+
+        <script>
+            {block:IfHideDisqusCommentCountIfZero}
+                hide_zero = true
+            {/block:IfHideDisqusCommentCountIfZero}
+            {block:IfNotHideDisqusCommentCountIfZero}
+                hide_zero = false
+            {block:IfNotHideDisqusCommentCountIfZero}
+        </script>
+
     </head>
     <body>        
         <!-- Facebook Script -->
@@ -1024,7 +1041,7 @@
                     {/block:NoteCount}
                 </div>
                 <div id="post">
-                    <div class="title"><a href="{URL}">{Name}</a></div>
+                    <div class="title link"><a href="{URL}">{Name}</a><span class="linkarrow">→</span></div>
                     {block:Description}
                         <div class="text">{Description}</div>
                     {/block:Description}
